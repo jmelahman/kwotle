@@ -63,11 +63,19 @@ header h2 {
     border: none;
     border-radius: 5px;
     font-size: 1rem;
-    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-#submit-button:hover {
+#submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#submit-button:not(:disabled) {
+    cursor: pointer;
+}
+
+#submit-button:not(:disabled):hover {
     background-color: #666;
 }
 

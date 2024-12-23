@@ -19,6 +19,7 @@ fetch('./data/quotes.json')
   });
 
 // Fetch authors data
+let authorSuggestions = [];
 fetch('./data/authors.json')
   .then(response => {
     if (!response.ok) {
@@ -27,12 +28,23 @@ fetch('./data/authors.json')
     return response.json();
   })
   .then(data => {
+    authorSuggestions = data.map(author => author.name);
     const dataList = document.getElementById('data-suggestions');
 
     data.forEach(item => {
       const option = document.createElement('option');
-      option.value = item;
+      option.value = item.name;
       dataList.appendChild(option);
+    });
+
+    // Disable submit button initially
+    const submitButton = document.getElementById('submit-button');
+    submitButton.disabled = true;
+
+    // Add input validation
+    const dataInput = document.getElementById('data-input');
+    dataInput.addEventListener('input', () => {
+      submitButton.disabled = !authorSuggestions.includes(dataInput.value);
     });
   })
   .catch(error => {
