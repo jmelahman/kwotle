@@ -1,5 +1,7 @@
-
 let quotesData = [];
+let correct = false;
+const submitButton = document.getElementById('submit-button');
+const dataInput = document.getElementById('data-input');
 
 // Fetch quotes data
 fetch('./data/quotes.json')
@@ -12,7 +14,7 @@ fetch('./data/quotes.json')
   .then(data => {
     quotesData = data;
     const firstItemDiv = document.getElementById('first-item');
-    firstItemDiv.textContent = data[0]["content"];
+    firstItemDiv.textContent = '"' + data[0]["content"] + '"';
   })
   .catch(error => {
     console.error('Error fetching the JSON file:', error);
@@ -37,14 +39,9 @@ fetch('./data/authors.json')
       dataList.appendChild(option);
     });
 
-    // Disable submit button initially
-    const submitButton = document.getElementById('submit-button');
-    submitButton.disabled = true;
-
     // Add input validation
-    const dataInput = document.getElementById('data-input');
     dataInput.addEventListener('input', event => {
-      submitButton.disabled = !authorSuggestions.includes(event.target.value.toLowerCase());
+      submitButton.disabled = !authorSuggestions.includes(event.target.value.toLowerCase()) || correct;
     });
   })
   .catch(error => {
@@ -53,20 +50,23 @@ fetch('./data/authors.json')
 
 // Handle form submission
 document.getElementById('submit-button').addEventListener('click', () => {
-  const dataInput = document.getElementById('data-input');
   const inputName = dataInput.value;
   const resultMessage = document.getElementById('result-message');
   const authorDetailsContainer = document.getElementById('author-details');
-  const submitButton = document.getElementById('submit-button');
 
   // Clear previous author details
   authorDetailsContainer.innerHTML = '';
-  
+
   // Clear input and disable submit button
   dataInput.value = '';
   submitButton.disabled = true;
 
   if (quotesData.length > 0 && inputName === quotesData[0]["author"]) {
+    correct = true;
+
+    const submitButton = document.getElementById('submit-button');
+    submitButton.disabled = true;
+
     resultMessage.textContent = 'Match found: The input matches the author.';
   } else {
     resultMessage.textContent = 'No match: The input does not match the author.';
