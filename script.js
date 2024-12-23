@@ -44,10 +44,42 @@ document.getElementById('submit-button').addEventListener('click', () => {
   console.log('handling click');
   const inputName = document.getElementById('data-input').value;
   const resultMessage = document.getElementById('result-message');
+  const authorDetailsContainer = document.getElementById('author-details');
+
+  // Clear previous author details
+  authorDetailsContainer.innerHTML = '';
 
   if (quotesData.length > 0 && inputName === quotesData[0]["author"]) {
     resultMessage.textContent = 'Match found: The input matches the author.';
   } else {
     resultMessage.textContent = 'No match: The input does not match the author.';
+    
+    // Fetch authors data to get details
+    fetch('./data/authors.json')
+      .then(response => response.json())
+      .then(authorsData => {
+        const authorData = authorsData.find(author => author.name === inputName);
+        
+        if (authorData) {
+          const authorDetailsHTML = `
+            <div class="author-card">
+              <div class="author-header">
+                <div class="author-avatar"></div>
+                <h2>${authorData.name}</h2>
+              </div>
+              <div class="author-info">
+                <p><strong>Nationality:</strong> ${authorData.nationality}</p>
+                <p><strong>Gender:</strong> ${authorData.gender}</p>
+                <p><strong>Profession:</strong> ${authorData.profession}</p>
+                <p><strong>Time Period:</strong> ${authorData.timePeriod}</p>
+              </div>
+            </div>
+          `;
+          authorDetailsContainer.innerHTML = authorDetailsHTML;
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching author details:', error);
+      });
   }
 });
