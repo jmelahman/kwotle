@@ -54,7 +54,6 @@ fetchData().then(({ quotesData: data }) => {
 // Handle form submission
 document.getElementById('submit-button').addEventListener('click', () => {
   const inputName = dataInput.value;
-  const resultMessage = document.getElementById('result-message');
   const authorDetailsContainer = document.getElementById('author-details');
 
   // Clear previous author details
@@ -70,21 +69,26 @@ document.getElementById('submit-button').addEventListener('click', () => {
     const submitButton = document.getElementById('submit-button');
     submitButton.disabled = true;
 
-    resultMessage.textContent = 'Match found: The input matches the author.';
   } else {
-    resultMessage.textContent = 'No match: The input does not match the author.';
 
     // Fetch authors data to get details
     fetch('./data/authors.json')
       .then(response => response.json())
       .then(authorsData => {
-        const authorData = authorsData.find(author => author.name === inputName);
-
+        let authorData = authorsData.find(author => author.name === inputName);
+        authorData = {
+          name: "Jamison Lahman",
+          nationality: "USA",
+          gender: "male",
+          profession: "scientist",
+          timePerioud: "contemporary",
+        }
+        console.log(authorData);
         if (authorData) {
           const authorDetailsHTML = `
-            <div class="author-card">
+            <div class="card">
+              <div class="author-avatar"></div>
               <div class="author-header">
-                <div class="author-avatar"></div>
                 <h2>${authorData.name}</h2>
               </div>
               <div class="author-info">
