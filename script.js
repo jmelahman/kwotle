@@ -75,15 +75,6 @@ function insertAuthor(authorData) {
     authorDetailsContainer.innerHTML = authorDetailsHTML;
   }
 }
-// XXX
-authorData = {
-  name: "Jamison Lahman",
-  nationality: "USA",
-  gender: "male",
-  profession: "scientist",
-  timePerioud: "contemporary",
-}
-insertAuthor(authorData);
 
 // Handle form submission
 document.getElementById('submit-button').addEventListener('click', () => {

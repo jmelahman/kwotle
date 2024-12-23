@@ -111,7 +111,7 @@ header h2 {
     align-items: center;
     width: 100%;
     font-weight: bold;
-    padding: 0.5rem;
+    padding: 0 0.5rem 0.5rem;
 }
 
 .author-header h3 {
@@ -119,8 +119,8 @@ header h2 {
 }
 
 .author-avatar img {
-    width: 94px;
-    height: 94px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     background-color: #ddd;
     margin-right: 1rem;
