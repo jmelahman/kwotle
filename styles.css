@@ -4,7 +4,7 @@
 
 body {
     font-family: Inter, Arial, sans-serif;
-    background: linear-gradient(to bottom right, #f0f0f0, #d0d0d0);
+    background: linear-gradient(to bottom right, #e6e6e6, #c0c0c0);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,7 +17,7 @@ body {
 header {
     text-align: center;
     margin-bottom: 2rem;
-    color: #333;
+    color: #4a4a4a;
 }
 
 header h1 {
@@ -34,13 +34,14 @@ header h2 {
 }
 
 .container {
-    background-color: white;
+    background-color: #f5f5f5;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     text-align: center;
     width: 90%;
     max-width: 564px;
+    border: 1px solid #d3d3d3;
 }
 
 .quote {
@@ -62,16 +63,17 @@ header h2 {
 #submit-button {
     width: 100%;
     padding: 0.75rem;
-    background-color: #4a4a4a;
+    background-color: #5a5a5a;
     color: white;
     border: none;
     border-radius: 5px;
     font-size: 1rem;
     transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #submit-button:disabled {
-    background-color: #ccc;
+    background-color: #a0a0a0;
     cursor: not-allowed;
 }
 
@@ -80,7 +82,7 @@ header h2 {
 }
 
 #submit-button:not(:disabled):hover {
-    background-color: #666;
+    background-color: #707070;
 }
 
 #result-message {
@@ -93,12 +95,14 @@ header h2 {
 }
 
 .author-card {
-    background-color: #f9f9f9;
+    background-color: #f0f0f0;
     border-radius: 10px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 1px solid #d3d3d3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .author-header {
