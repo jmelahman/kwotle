@@ -51,13 +51,43 @@ fetchData().then(({ quotesData: data }) => {
   quotesData = data;
 });
 
+function insertAuthor(authorData) {
+  const authorDetailsContainer = document.getElementById('author-details');
+  if (authorData) {
+    const authorDetailsHTML = `
+            <div class="card row">
+              <div class="author-avatar">
+                <img src="images/jamison.jpg"/>
+                </div>
+                <div class="author-details">
+                <div class="author-header">
+                  <h3>${authorData.name}</h3>
+                </div>
+                <div class="author-info">
+                  <div class="correct"><strong>Gender</strong> ${authorData.gender}</div>
+                  <div class="correct"><strong>Nationality</strong> ${authorData.nationality}</div>
+                  <div class="close"><strong>Profession</strong> ${authorData.profession}</div>
+                  <div><strong>Period</strong> ${authorData.timePeriod}</div>
+                </div>
+              </div>
+            </div>
+          `;
+    authorDetailsContainer.innerHTML = authorDetailsHTML;
+  }
+}
+// XXX
+authorData = {
+  name: "Jamison Lahman",
+  nationality: "USA",
+  gender: "male",
+  profession: "scientist",
+  timePerioud: "contemporary",
+}
+insertAuthor(authorData);
+
 // Handle form submission
 document.getElementById('submit-button').addEventListener('click', () => {
   const inputName = dataInput.value;
-  const authorDetailsContainer = document.getElementById('author-details');
-
-  // Clear previous author details
-  authorDetailsContainer.innerHTML = '';
 
   // Clear input and disable submit button
   dataInput.value = '';
@@ -76,31 +106,7 @@ document.getElementById('submit-button').addEventListener('click', () => {
       .then(response => response.json())
       .then(authorsData => {
         let authorData = authorsData.find(author => author.name === inputName);
-        authorData = {
-          name: "Jamison Lahman",
-          nationality: "USA",
-          gender: "male",
-          profession: "scientist",
-          timePerioud: "contemporary",
-        }
-        console.log(authorData);
-        if (authorData) {
-          const authorDetailsHTML = `
-            <div class="card">
-              <div class="author-avatar"><img src="images/jamison.jpg"/></div>
-              <div class="author-header">
-                <h2>${authorData.name}</h2>
-              </div>
-              <div class="author-info">
-                <p><strong>Nationality:</strong> ${authorData.nationality}</p>
-                <p><strong>Gender:</strong> ${authorData.gender}</p>
-                <p><strong>Profession:</strong> ${authorData.profession}</p>
-                <p><strong>Time Period:</strong> ${authorData.timePeriod}</p>
-              </div>
-            </div>
-          `;
-          authorDetailsContainer.innerHTML = authorDetailsHTML;
-        }
+        insertAuthor(authorData);
       })
       .catch(error => {
         console.error('Error fetching author details:', error);

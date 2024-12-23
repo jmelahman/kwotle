@@ -49,6 +49,11 @@ header h2 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
 .quote {
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
@@ -104,28 +109,43 @@ header h2 {
 .author-header {
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
     width: 100%;
+    font-weight: bold;
+    padding: 0.5rem;
 }
 
-.author-avatar {
-    width: 80px;
-    height: 80px;
+.author-header h3 {
+    margin: 0;
+}
+
+.author-avatar img {
+    width: 94px;
+    height: 94px;
     border-radius: 50%;
     background-color: #ddd;
     margin-right: 1rem;
-}
-
-.author-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
+    overflow: hidden;
 }
 
 .author-info {
     width: 100%;
+    display: flex;
 }
 
-.author-info p {
-    margin: 0.5rem 0;
+.author-info div {
+    background-color: #c0c0c0;
+    border-radius: 5px;
+    margin: 0.25rem;
+    padding: 0.25rem;
     color: #555;
+}
+
+.author-info .correct {
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+}
+
+.author-info .close {
+  background-color: #FDEFB2;
+  border: 1px solid #F9E076;
 }
