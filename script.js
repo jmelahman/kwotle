@@ -41,7 +41,6 @@ fetch('./data/authors.json')
 
 // Handle form submission
 document.getElementById('submit-button').addEventListener('click', () => {
-  console.log('handling click');
   const inputName = document.getElementById('data-input').value;
   const resultMessage = document.getElementById('result-message');
   const authorDetailsContainer = document.getElementById('author-details');
@@ -53,13 +52,13 @@ document.getElementById('submit-button').addEventListener('click', () => {
     resultMessage.textContent = 'Match found: The input matches the author.';
   } else {
     resultMessage.textContent = 'No match: The input does not match the author.';
-    
+
     // Fetch authors data to get details
     fetch('./data/authors.json')
       .then(response => response.json())
       .then(authorsData => {
         const authorData = authorsData.find(author => author.name === inputName);
-        
+
         if (authorData) {
           const authorDetailsHTML = `
             <div class="author-card">
