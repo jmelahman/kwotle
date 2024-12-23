@@ -28,7 +28,7 @@ fetch('./data/authors.json')
     return response.json();
   })
   .then(data => {
-    authorSuggestions = data.map(author => author.name);
+    authorSuggestions = data.map(author => author.toLowerCase());
     const dataList = document.getElementById('data-suggestions');
 
     data.forEach(item => {
@@ -43,8 +43,8 @@ fetch('./data/authors.json')
 
     // Add input validation
     const dataInput = document.getElementById('data-input');
-    dataInput.addEventListener('input', () => {
-      submitButton.disabled = !authorSuggestions.includes(dataInput.value);
+    dataInput.addEventListener('input', event => {
+      submitButton.disabled = !authorSuggestions.includes(event.target.value.toLowerCase());
     });
   })
   .catch(error => {
