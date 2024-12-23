@@ -73,8 +73,12 @@ header h2 {
 }
 
 #submit-button:disabled {
-    background-color: #a0a0a0;
+    background-color: #c0c0c0;
     cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+    border: 2px solid #a0a0a0;
+    color: #7a7a7a;
 }
 
 #submit-button:not(:disabled) {
