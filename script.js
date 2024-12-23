@@ -53,12 +53,18 @@ fetch('./data/authors.json')
 
 // Handle form submission
 document.getElementById('submit-button').addEventListener('click', () => {
-  const inputName = document.getElementById('data-input').value;
+  const dataInput = document.getElementById('data-input');
+  const inputName = dataInput.value;
   const resultMessage = document.getElementById('result-message');
   const authorDetailsContainer = document.getElementById('author-details');
+  const submitButton = document.getElementById('submit-button');
 
   // Clear previous author details
   authorDetailsContainer.innerHTML = '';
+  
+  // Clear input and disable submit button
+  dataInput.value = '';
+  submitButton.disabled = true;
 
   if (quotesData.length > 0 && inputName === quotesData[0]["author"]) {
     resultMessage.textContent = 'Match found: The input matches the author.';
