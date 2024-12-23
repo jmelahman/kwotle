@@ -33,7 +33,7 @@ fetch('./data/authors.json')
 
     data.forEach(item => {
       const option = document.createElement('option');
-      option.value = item.name;
+      option.value = item;
       dataList.appendChild(option);
     });
 
