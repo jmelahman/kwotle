@@ -54,6 +54,7 @@ header h2 {
     border: 2px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
+    box-sizing: border-box;
 }
 
 #submit-button {
