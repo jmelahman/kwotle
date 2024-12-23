@@ -1,39 +1,35 @@
 let quotesData = [];
+let authorSuggestions = [];
 let correct = false;
 const submitButton = document.getElementById('submit-button');
 const dataInput = document.getElementById('data-input');
 
-// Fetch quotes data
-fetch('./data/quotes.json')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    quotesData = data;
-    const firstItemDiv = document.getElementById('first-item');
-    firstItemDiv.textContent = '"' + data[0]["content"] + '"';
-  })
-  .catch(error => {
-    console.error('Error fetching the JSON file:', error);
-  });
+// Fetch data asynchronously
+async function fetchData() {
+  try {
+    const [quotesResponse, authorsResponse] = await Promise.all([
+      fetch('./data/quotes.json'),
+      fetch('./data/authors.json')
+    ]);
 
-// Fetch authors data
-let authorSuggestions = [];
-fetch('./data/authors.json')
-  .then(response => {
-    if (!response.ok) {
+    if (!quotesResponse.ok || !authorsResponse.ok) {
       throw new Error('Network response was not ok');
     }
-    return response.json();
-  })
-  .then(data => {
-    authorSuggestions = data.map(author => author.toLowerCase());
+
+    const [quotesData, authorsData] = await Promise.all([
+      quotesResponse.json(),
+      authorsResponse.json()
+    ]);
+
+    // Set first quote
+    const firstItemDiv = document.getElementById('first-item');
+    firstItemDiv.textContent = '"' + quotesData[0]["content"] + '"';
+
+    // Populate author suggestions
+    authorSuggestions = authorsData.map(author => author.toLowerCase());
     const dataList = document.getElementById('data-suggestions');
 
-    data.forEach(item => {
+    authorsData.forEach(item => {
       const option = document.createElement('option');
       option.value = item;
       dataList.appendChild(option);
@@ -43,10 +39,17 @@ fetch('./data/authors.json')
     dataInput.addEventListener('input', event => {
       submitButton.disabled = !authorSuggestions.includes(event.target.value.toLowerCase()) || correct;
     });
-  })
-  .catch(error => {
-    console.error('Error fetching the JSON file:', error);
-  });
+
+    return { quotesData, authorsData };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+// Initialize data on page load
+fetchData().then(({ quotesData: data }) => {
+  quotesData = data;
+});
 
 // Handle form submission
 document.getElementById('submit-button').addEventListener('click', () => {
