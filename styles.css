@@ -44,6 +44,7 @@ header h2 {
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
     color: #333;
+    min-height: 48px;
 }
 
 #data-input {
