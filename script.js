@@ -87,7 +87,7 @@ document.getElementById('submit-button').addEventListener('click', () => {
         if (authorData) {
           const authorDetailsHTML = `
             <div class="card">
-              <div class="author-avatar"></div>
+              <div class="author-avatar"><img src="images/jamison.jpg"/></div>
               <div class="author-header">
                 <h2>${authorData.name}</h2>
               </div>
